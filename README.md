@@ -13,6 +13,11 @@ An example of how Server Side Rendering works with React and Redux.
 
 2. Need to turn components into HTML - use the `renderToString` from `react-dom/server` library
 
+3. Loading Javascript so we can use event handlers, action creators, data loading requests, etc. - create two separate bundles for backend and the browser
+  - Show initial server rendered HTML on the browser
+  - Fetch a client bundle that will boot up React app 
+  - Re-render the second time using that bundle which takes over the existing render app, binds event handlers, etc.
+
 
 ## Hot Reloading
 
