@@ -8,7 +8,7 @@ const app = express();
 // bundle.js
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.send(renderer(req));
 });
 
