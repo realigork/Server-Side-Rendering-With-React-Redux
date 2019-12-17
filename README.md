@@ -9,14 +9,20 @@ An example of how Server Side Rendering works with React and Redux.
 
 ## Problems setting up Server Side Rendering
 
-1. JSX on the server - Run Webpack on all of our server side code, then execure the bundle
+Problem #1: JSX on the server.
+Solution: Run Webpack on all of our server side code, then execure the bundle
 
-2. Need to turn components into HTML - use the `renderToString` from `react-dom/server` library
+Problem #2: Need to turn components into HTML.
+Solution: use the `renderToString` from `react-dom/server` library
 
-3. Loading Javascript so we can use event handlers, action creators, data loading requests, etc. - create two separate bundles for backend and the browser
+Problem #3: Loading Javascript so we can use event handlers, action creators, data loading requests, etc.
+Solution: create two separate bundles for backend and the browser
   - Show initial server rendered HTML on the browser
   - Fetch a client bundle that will boot up React app 
   - Re-render the second time using that bundle which takes over the existing render app, binds event handlers, etc.
+
+Problem #4: React Router on the server is not aware of the address bar.
+Solution: Use **StaticRouter** on the server and **BrowserRouter** on the client
 
 
 ## Hot Reloading
