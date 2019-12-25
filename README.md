@@ -37,4 +37,13 @@ Restart the server using `nodemon` every time there is a change to the `bundle.j
 - The `--exec` flag tells Node, which function to execute when change happens.
 
 
+## 4 Big Redux Challenges
+1. Redux needs different config on browser vs server - You will need 2 different stores: browser and server.
+2. Aspects of authentication needs to be handled on server. Normally this is only on browser! - This is done through the use of cookies. No cookies on the server.
+3. Need some way to detect when all initial data load action creators are completed on server - so we can then put the app into a string and render it on user's browser
+4. Need state rehydration on the browser
 
+
+## API
+Users API: 
+https://react-ssr-api.herokuapp.com/
