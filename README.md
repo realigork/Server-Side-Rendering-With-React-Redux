@@ -38,12 +38,13 @@ Restart the server using `nodemon` every time there is a change to the `bundle.j
 
 
 ## 4 Big Redux Challenges
-1. Redux needs different config on browser vs server - You will need 2 different stores: browser and server.
+1. Redux needs different config on browser vs server.
+Solution: You will need 2 different stores: browser and server.
 
 2. Aspects of authentication needs to be handled on server. Normally this is only on browser! - This is done through the use of cookies. No cookies on the server.
 
 3. Need some way to detect when all initial data load action creators are completed on server, so we can then put the app into a string and render it on user's browser. Component lifecycle methods such as `componentDidMount` don't work on the server.
-Solution: look at the requested URL and figure out which components will be rendered. Call a method to load data attached to those components.
+Solution: look at the requested URL and figure out which components will be rendered. Use `matchRoutes` from `react-router-config` to detect current routes and components that will be rendered through Express. Call a method to load data attached to those components.
 
 4. Need state rehydration on the browser.
 
