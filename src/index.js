@@ -1,10 +1,21 @@
 import 'babel-polyfill';
 import express from 'express';
+import proxy from 'express-http-proxy';
 import { matchRoutes } from 'react-router-config';
 import Routes from './client/Routes';
 import renderer from './helpers/renderer';
 import createStore from './helpers/createStore';
+
 const app = express();
+
+// Redirect any requests to /api
+app.use('/api', proxy('http://react-ssr-api.heorkuapp.com', {
+  proxyReqOptDecorator(opts) {
+    // Used for Google's oauth 
+    opts.header['x-forwarded-host'] = 'localhost:3000';
+    return opts;
+  }
+}));
 
 // Tell Express to use 'public' folder as the one available
 // to show to the outside world from which it will download

@@ -53,6 +53,30 @@ Check documentation for React Router Config that works with SSR.
 https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 
 
+## Authentication
+
+Server needs to be aware of the user state so it can make initial requests to the API (e.g. when user is logged in and we need to send a request, the server needs to know that user is authenticated, through cookie, json token, etc). After the initial request we then use a Proxy server that would act as a browser to send requests to the API.
+
+Use cookies to pass the specific state because they are attached automatically to the domain. Whereas with JSON token you would have to attach manually.
+
+
+### Traditional approach
+
+Browser makes direct calls to the API.
+
+```
+Browser - API
+```
+
+### SSR approach
+
+Server needs to make initial request to the API. Then, Proxy server is used to send requests on behalf of the browser.
+
+```
+Browser - Server (includes Proxy) - API
+```
+
+
 ## API
-Users API: 
+
 https://react-ssr-api.herokuapp.com/
