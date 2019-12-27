@@ -12,7 +12,7 @@ const app = express();
 app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
   proxyReqOptDecorator(opts) {
     // Used for Google's oauth 
-    opts.header['x-forwarded-host'] = 'localhost:3000';
+    opts.headers['x-forwarded-host'] = 'localhost:3000';
     return opts;
   }
 }));
@@ -23,7 +23,7 @@ app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
-  const store = createStore();
+  const store = createStore(req);
 
   // Some logic to initialise and load data into the store.
   // Extract 'route' using destructuring
