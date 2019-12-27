@@ -9,7 +9,7 @@ import createStore from './helpers/createStore';
 const app = express();
 
 // Redirect any requests to /api
-app.use('/api', proxy('http://react-ssr-api.heorkuapp.com', {
+app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
   proxyReqOptDecorator(opts) {
     // Used for Google's oauth 
     opts.header['x-forwarded-host'] = 'localhost:3000';
