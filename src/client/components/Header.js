@@ -11,7 +11,7 @@ const Header = ({ auth }) => {
     <nav>
       <div className="nav-wrapper">
         <Link to="/" className="brand-logo">React SSR</Link>
-        <ul class="right">
+        <ul className="right">
           <li>
             <Link to="/users">Users</Link>
           </li>
