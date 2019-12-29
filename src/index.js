@@ -25,12 +25,22 @@ app.use(express.static('public'));
 app.get('*', (req, res) => {
   const store = createStore(req);
 
-  // Some logic to initialise and load data into the store.
-  // Extract 'route' using destructuring
+  // Collect 'loadData' from page components and execute them.
+  // Extract 'route' using destructuring.
   const promises = matchRoutes(Routes, req.path).map((({ route }) => {
     return route.loadData ? route.loadData(store) : null;
-  }));
+  })).map(promise => {
+    // Wrap all promises in another promise to force them as resolved.
+    // This avoid issue with Node when there is an error fetching data and
+    // promises will get terminated into catch.
+    if (promise) {
+      return new Promise((resolve, reject) => {
+        promise.then(resolve).catch(resolve);
+      })
+    }
+  });
 
+  // Once all promises resolved successfully, try to render content
   Promise.all(promises).then(() => {
     const context = {};
     const content = renderer(req, store, context);
