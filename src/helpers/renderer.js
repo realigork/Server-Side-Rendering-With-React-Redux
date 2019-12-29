@@ -18,7 +18,9 @@ export default (req, store) => {
   // Tell Express to download the public bundle
   return `
     <html>
-      <head></head> 
+      <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      </head> 
       <body>
         <div id="root">${content}</div>
         <script>
