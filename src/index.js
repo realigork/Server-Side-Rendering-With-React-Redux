@@ -27,9 +27,9 @@ app.get('*', (req, res) => {
 
   // Collect 'loadData' from page components and execute them.
   // Extract 'route' using destructuring.
-  const promises = matchRoutes(Routes, req.path).map((({ route }) => {
+  const promises = matchRoutes(Routes, req.path).map(({ route }) => {
     return route.loadData ? route.loadData(store) : null;
-  })).map(promise => {
+  }).map(promise => {
     // Wrap all promises in another promise to force them as resolved.
     // This avoid issue with Node when there is an error fetching data and
     // promises will get terminated into catch.
@@ -44,6 +44,13 @@ app.get('*', (req, res) => {
   Promise.all(promises).then(() => {
     const context = {};
     const content = renderer(req, store, context);
+
+    // Trying to access blocked routes when JS is disabled
+    // will produce a 'REPLACE' object. 
+    // Manually handle of redirect.
+    if (context.url) {
+      return res.redirect(301, context.url);
+    }
 
     if (context.notFound) {
       res.status(404);
